@@ -1073,7 +1073,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         addShape(drawable, nameID);
         gl.glPopMatrix();
     }
-
+    //TODO: прорисовка филлера
     private void addTopShape(GLAutoDrawable drawable, int nameID) {
 
         GL2 gl = drawable.getGL().getGL2();
@@ -1214,7 +1214,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         return "nameID " + nameID;
     } // end of idToString()
 
-
+    //TODO: выбор модели из палеты
     private void pickModels(GLAutoDrawable drawable) {
         GL2 gl = drawable.getGL().getGL2();
 
@@ -1313,7 +1313,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                 0, 0, 0,
                 0, 1, 0);
     }
-
+    //TODO: прорисовка выбора фигур слева внизу (палет)
     private void palette(GLAutoDrawable drawable) {
         GL2 gl = drawable.getGL().getGL2();
         gl.glMatrixMode(GL2.GL_MODELVIEW);
@@ -1455,7 +1455,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         Shapes.rectangularPyramid(gl);
         gl.glPopMatrix();
     }
-
+    //TODO: прорисовка самой фигуры в наборе слева (палет)
     private void palettePentagonPyramid(GLAutoDrawable drawable) {
         GL2 gl = drawable.getGL().getGL2();
         gl.glColor3f(paletteRed, paletteGreen, paletteBlue);
@@ -1478,7 +1478,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         Shapes.hexagonPyramid(gl);
         gl.glPopMatrix();
     }
-
+    //TODO: прорисовка всех фигур и филлеров
     private void drawBlueprint(GLAutoDrawable drawable) {
         GL2 gl = drawable.getGL().getGL2();
         gl.glViewport(windowWidth / 8, 0, windowWidth, windowHeight);
@@ -1613,7 +1613,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         gl.glPopMatrix();
     }
 
-
+//TODO: прорисовка фигуры
     private void drawTop(GLAutoDrawable drawable) {
         GL2 gl = drawable.getGL().getGL2();
         gl.glPushMatrix();
@@ -1709,7 +1709,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
     @Override
     public void keyTyped(KeyEvent e) {
     }
-
+    //TODO: с какой точки начинаем передвижение
     public void colorShape(int travers) {
         switch (travers) {
             case LEFT_ID:
@@ -2172,7 +2172,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                 }
 
                 break;
-
+            //TODO: кнопка по переключению между обьектами
             case KeyEvent.VK_W:
                 travers++;
                 colorShape(travers);
