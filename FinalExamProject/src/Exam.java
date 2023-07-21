@@ -16,7 +16,6 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 public class Exam extends GLCanvas implements GLEventListener, KeyListener, MouseListener {
@@ -243,7 +242,8 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             TETRAHEDRON = 6,
             RECTANGULAR_PYRAMID = 7,
             PENTAGON_PYRAMID = 8,
-            HEXAGON_PYRAMID = 9;
+            HEXAGON_PYRAMID = 9,
+            CUBE_AZAT = 52;
 
 
     // palette shapes
@@ -256,11 +256,12 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
     private final static int RECTANGULAR_PYRAMID_ID = 16;
     private final static int PENTAGON_PYRAMID_ID = 17;
     private final static int HEXAGON_PYRAMID_ID = 18;
+    private final static int CUBE_AZAT_ID = 19;
 
     private final static String[] shape = {" ", "SPHERE", "CYLINDER", "CONE", "CUBE", "CUBOID", "TETRAHEDRON",
             "RECTANGULAR_PYRAMID", "PENTAGON_PYRAMID", "HEXAGON_PYRAMID",
             "SPHERE", "CUBOID", "CYLINDER", "CUBE", "TETRAHEDRON", "CONE",
-            "RECTANGULAR_PYRAMID", "PENTAGON_PYRAMID", "HEXAGON_PYRAMID"};
+            "RECTANGULAR_PYRAMID", "PENTAGON_PYRAMID", "HEXAGON_PYRAMID", "CUBE_AZAT"};
 
     private GLCanvas canvas;
     private FPSAnimator animator;
@@ -689,12 +690,13 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             list.add(i);
         }
 
-        Collections.shuffle(list);
+ //       Collections.shuffle(list);
 
         randomFront = list.get(0);
         randomBack = list.get(1);
         randomTop = list.get(2);
-        randomTopTwo = list.get(3);
+    //    randomTopTwo = list.get(3);
+        randomTopTwo = list.get(4);
         randomRight = list.get(4);
         randomLeft = list.get(5);
         randomLeftTwo = list.get(6);
@@ -978,7 +980,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             }
             float maxZ = getDepth(offset);
             offset++;
-
+            //TODO: здесь выбираем айдишник фигуры
             for (int j = 0; j < numNames; j++) {
                 nameID = selectBuffer.get(offset);
                 System.out.print(idToString(nameID) + "\n");
@@ -1023,6 +1025,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                 break;
             case HEXAGON_PYRAMID_ID:
                 Shapes.hexagonPyramid(gl);
+                break;
+            case CUBE_AZAT_ID:
+                Shapes.cubeAzat(gl);
                 break;
         }
     }
@@ -1194,6 +1199,8 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             return "front";
         else if (nameID == SPHERE_ID)
             return "palette_sphere";
+        else if (nameID == CUBE_AZAT_ID)
+            return "azat_cube";
         else if (nameID == CUBOID_ID)
             return "palette_cuboid";
         else if (nameID == TETRAHEDRON_ID)
@@ -1221,21 +1228,21 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         startPicking(drawable);
         palettePicking(drawable);
 
-        gl.glPushName(SPHERE_ID);
-        paletteSphere(drawable);
-        gl.glPopName();
+//        gl.glPushName(SPHERE_ID);
+//        paletteSphere(drawable);
+//        gl.glPopName();
+//
+//        gl.glPushName(CUBOID_ID);
+//        paletteCuboid(drawable);
+//        gl.glPopName();
 
-        gl.glPushName(CUBOID_ID);
-        paletteCuboid(drawable);
-        gl.glPopName();
-
-        gl.glPushName(CYLINDER_ID);
-        paletteCylinder(drawable);
-        gl.glPopName();
-
-        gl.glPushName(TETRAHEDRON_ID);
-        paletteTetrahedron(drawable);
-        gl.glPopName();
+//        gl.glPushName(CYLINDER_ID);
+//        paletteCylinder(drawable);
+//        gl.glPopName();
+//
+//        gl.glPushName(TETRAHEDRON_ID);
+//        paletteTetrahedron(drawable);
+//        gl.glPopName();
 
         gl.glPushName(CUBE_ID);
         paletteCube(drawable);
@@ -1245,17 +1252,20 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         paletteCone(drawable);
         gl.glPopName();
 
-        gl.glPushName(RECTANGULAR_PYRAMID_ID);
-        paletteRectangularPyramid(drawable);
+        gl.glPushName(CUBE_AZAT_ID);
+        paletteCubeAzat(drawable);
         gl.glPopName();
+//        gl.glPushName(RECTANGULAR_PYRAMID_ID);
+//        paletteRectangularPyramid(drawable);
+//        gl.glPopName();
 
-        gl.glPushName(PENTAGON_PYRAMID_ID);
-        palettePentagonPyramid(drawable);
-        gl.glPopName();
-
-        gl.glPushName(HEXAGON_PYRAMID_ID);
-        paletteHexagonPyramid(drawable);
-        gl.glPopName();
+//        gl.glPushName(PENTAGON_PYRAMID_ID);
+//        palettePentagonPyramid(drawable);
+//        gl.glPopName();
+//
+//        gl.glPushName(HEXAGON_PYRAMID_ID);
+//        paletteHexagonPyramid(drawable);
+//        gl.glPopName();
 
         gl.glPushMatrix();
         blueprintPicking(drawable);
@@ -1342,18 +1352,28 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
 
 
-        palettePentagonPyramid(drawable);
-        paletteSphere(drawable);
-        paletteCuboid(drawable);
-        paletteCylinder(drawable);
+//        palettePentagonPyramid(drawable);
+//        paletteSphere(drawable);
+//        paletteCuboid(drawable);
+//        paletteCylinder(drawable);
         paletteCube(drawable);
-        paletteTetrahedron(drawable);
+//        paletteTetrahedron(drawable);
         paletteCone(drawable);
+        paletteCubeAzat(drawable);
 
-        paletteRectangularPyramid(drawable);
-        paletteHexagonPyramid(drawable);
+//        paletteRectangularPyramid(drawable);
+//        paletteHexagonPyramid(drawable);
 
 
+    }
+    public void paletteCubeAzat(GLAutoDrawable drawable) {
+        GL2 gl = drawable.getGL().getGL2();
+        gl.glColor3f(paletteRed, paletteGreen, paletteBlue);
+        gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2.GL_FILL);
+        gl.glPushMatrix();
+        gl.glTranslated(-3.5f, 2.5f, 0);
+        Shapes.cubeAzat(gl);
+        gl.glPopMatrix();
     }
 
     private void paletteBackground(GLAutoDrawable drawable) {
@@ -1504,23 +1524,25 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
 
         drawTop(drawable);
         drawTopTwo(drawable);
-        drawRight(drawable);
-        drawLeft(drawable);
-        drawLeftTwo(drawable);
-        drawBottom(drawable);
-        drawBottomTwo(drawable);
-        drawFront(drawable);
-        drawBack(drawable);
+//        drawRight(drawable);
+//        drawLeft(drawable);
+//        drawLeftTwo(drawable);
+//        drawBottom(drawable);
+//        drawBottomTwo(drawable);
+//        drawFront(drawable);
+//        drawBack(drawable);
 
-        addLeftShape(drawable, left_idn);
-        addLeftTwoShape(drawable, left_two_idn);
-        addRightShape(drawable, right_idn);
+//        addLeftShape(drawable, left_idn);
+//        addLeftTwoShape(drawable, left_two_idn);
+//        addRightShape(drawable, right_idn);
+        //TODO: филлер получает idn когда добавляется фигура
         addTopShape(drawable, top_idn);
         addTopTwoShape(drawable, top_two_idn);
-        addBottomShape(drawable, bottom_idn);
-        addBottomTwoShape(drawable, bottom_two_idn);
-        addFrontShape(drawable, front_idn);
-        addBackShape(drawable, back_idn);
+        System.out.println("top two idn "+top_two_idn);
+//        addBottomShape(drawable, bottom_idn);
+//        addBottomTwoShape(drawable, bottom_two_idn);
+//        addFrontShape(drawable, front_idn);
+//        addBackShape(drawable, back_idn);
 
         gl.glPopMatrix();
     }
@@ -1555,6 +1577,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                 break;
             case HEXAGON_PYRAMID:
                 Shapes.hexagonPyramid(gl);
+                break;
+            case CUBE_AZAT:
+                Shapes.cubeAzat(gl);
                 break;
         }
     }
@@ -1638,7 +1663,8 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         gl.glTranslated(topTwoX, topTwoY, topTwoZ);
         gl.glScalef(scaleTopTwoShape, scaleTopTwoShape, scaleTopTwoShape);
 
-        drawShape(drawable, randomTopTwo);
+    //    drawShape(drawable, randomTopTwo);
+        drawShape(drawable, 52);
         gl.glPopMatrix();
     }
 
@@ -2369,12 +2395,18 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                 }
 
         } else if (travers == 5) {
+            System.out.println("traverse 5 " + top_two_idn);
+            System.out.println("randomTopTwo " + randomTopTwo);
+            System.out.println(shape[randomTopTwo].equals(shape[top_two_idn]));
+            System.out.println(topTwoScaleCheck(scaleTopTwo).equals("appropriate"));
+            System.out.println(rotationCheck(randomTopTwo, angleTopTwoX, angleTopTwoY, angleTopTwoZ).equals("correct"));
             if (shape[randomTopTwo].equals(shape[top_two_idn]))
                 if (topTwoScaleCheck(scaleTopTwo).equals("appropriate")
                         && rotationCheck(randomTopTwo, angleTopTwoX, angleTopTwoY, angleTopTwoZ).equals("correct")) {
                     writeMatch("Well Done! Correct shape, rotation and scaling.",
                             (int) (windowWidth / 4f), windowHeight - 40);
                 }
+
 
         } else if (travers == 6) {
             if (shape[randomBottom].equals(shape[bottom_idn]))
@@ -2659,11 +2691,14 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         // 7 - RECTANGULAR_PYRAMID
         // 8 - PENTAGON_PYRAMID
         // 9 - HEXAGON_PYRAMID
+        // 19 - Azat Cube
 
+        System.out.println("shape "+shape);
 
         String text;
         if (shape == 1) {
             text = "correct";
+            System.out.println("shape 1");
         } else if (shape == 2) {
             // x and y
             if ((angleX == 0 || angleX == 360 || angleX == 180) && (angleY == 0 || angleY == 360 || angleY == 180)) {
@@ -2671,6 +2706,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             } else {
                 text = "incorrect";
             }
+            System.out.println("shape 2");
         } else if (shape == 6) {
             // x, y and z
             if ((angleX == 180 && angleY == 180 && angleZ == 180) ||
@@ -2681,6 +2717,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             } else {
                 text = "incorrect";
             }
+            System.out.println("shape 6");
         } else if (shape == 3) {
             // x, y and z
             if ((angleX == 180 && angleY == 180) || ((angleX == 0 || angleX == 360) && (angleY == 0 || angleY == 360))) {
@@ -2688,6 +2725,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             } else {
                 text = "incorrect";
             }
+            System.out.println("shape 3");
         } else if (shape == 5) {
             // x, y and z
             if (((angleX == 0 || angleX == 360 || angleX == 180 || angleX == 270 || angleX == 90) &&
@@ -2697,6 +2735,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             } else {
                 text = "incorrect";
             }
+            System.out.println("shape 5");
         } else if (shape == 4) {
             // x, y and z
             if (((angleX == 0 || angleX == 360 || angleX == 180 || angleX == 270 || angleX == 90) &&
@@ -2706,6 +2745,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             } else {
                 text = "incorrect";
             }
+            System.out.println("shape 4");
         } else if (shape == 7) {
             // x, y and z
             if (((angleX == 0) &&
@@ -2718,6 +2758,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             } else {
                 text = "incorrect";
             }
+            System.out.println("shape 7");
         } else if (shape == 8) {
             // x, y and z
             if (((angleY == 0 || angleY == 360) &&
@@ -2727,6 +2768,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             } else {
                 text = "incorrect";
             }
+            System.out.println("shape 8");
         } else if (shape == 9) {
             // x, y and z
             if (((angleY == 0 || angleY == 360 || angleY == 180) &&
@@ -2736,6 +2778,17 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             } else {
                 text = "incorrect";
             }
+            System.out.println("shape 9");
+            //TODO: проверка моего касомного куба
+        } else if (shape == 19) {
+            if (((angleX == 0 || angleX == 360 || angleX == 180 || angleX == 270 || angleX == 90) &&
+                    (angleY == 0 || angleY == 360 || angleY == 180 || angleY == 270 || angleY == 90) &&
+                    (angleZ == 0 || angleZ == 360 || angleZ == 180 || angleZ == 270 || angleZ == 90))) {
+                text = "correct";
+            } else {
+                text = "incorrect";
+            }
+            System.out.println("GIGAZAT10");
         } else {
             text = "incorrect";
         }
