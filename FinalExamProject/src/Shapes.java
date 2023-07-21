@@ -7,6 +7,11 @@ public class Shapes {
         cube(gl, 1, true);
     }
 
+    public static void cubeAzat(GL2 gl) {
+        cube(gl, 2, true);
+    }
+
+
     public static void cuboid(GL2 gl) {
         cuboid(gl, 1, true);
     }
