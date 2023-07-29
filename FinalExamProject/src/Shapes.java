@@ -46,7 +46,7 @@ public class Shapes {
     public static void uvCylinder(GL2 gl) {
         gl.glPushMatrix();
         gl.glTranslated(0, 0, -0.5);
-        uvCylinder(gl, 0.5, 1, 16, 10, 5, true);
+        uvCylinder(gl, 0.4, 1.2, 16, 10, 5, true);
         gl.glPopMatrix();
     }
 
