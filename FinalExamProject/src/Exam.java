@@ -737,7 +737,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
 
         // TOP
         topX = -0.5;
-        topY = 1.5;
+        topY = 2;
         topZ = 0.5;
 
         scaleTopShape = 1;
@@ -1089,6 +1089,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2.GL_FILL);
         gl.glPushMatrix();
         gl.glTranslated(-3.5f, 2.5f, 0);
+        gl.glRotatef(60, 0, 1, 0);
         Shapes.cubeAzat(gl);
         gl.glPopMatrix();
     }
@@ -1141,11 +1142,10 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         gl.glRotated(currentAngleOfRotationX, 1, 0, 0);
         gl.glRotated(currentAngleOfRotationY, 0, 1, 0);
 
-        gl.glColor3f(1, 1, 1);
+        gl.glColor3f(0.5f, 1.0f, 0.7f);
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
-        textures[0].bind(gl);  // Says which texture to use.
-        gl.glEnable(GL.GL_TEXTURE_2D);
-        Shapes.cube(gl, 2, true);
+
+        Shapes.platform(gl);
         gl.glDisable(GL.GL_TEXTURE_2D);
 
         drawTop(drawable);
@@ -1181,6 +1181,8 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
 
         gl.glTranslated(topX, topY, topZ);
         gl.glScalef(scaleTopShape, scaleTopShape, scaleTopShape);
+
+        gl.glRotatef(-90, 1, 0, 0);
 
         drawShape(drawable, randomTop);
         gl.glPopMatrix();
@@ -1516,9 +1518,13 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
     }
 
     public void printMatch(GLAutoDrawable drawable) {
+        // CONUS - 1
+        // AZAT_CUB - 2
+        // CYLINDER - 3
 
         if (travers == 1) {
             if (shape[randomTop].equals(shape[top_idn]))
+//            System.out.println("rotation check " + rotationCheck(randomTop, angleTopX, angleTopY, angleTopZ).equals("correct"));
                 if (topScaleCheck(scaleTop).equals("appropriate")
                         && rotationCheck(randomTop, angleTopX, angleTopY, angleTopZ).equals("correct")) {
                     writeMatch("Well Done! Correct shape, rotation and scaling.",
@@ -1526,12 +1532,12 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                 }
 
         } else if (travers == 2) {
-            System.out.println("traverse 2 " + top_two_idn);
-            System.out.println("randomTopTwo " + randomTopTwo);
-            System.out.println(shape[randomTopTwo].equals(shape[top_two_idn]));
-            System.out.println(topTwoScaleCheck(scaleTopTwo).equals("appropriate"));
-            System.out.println(rotationCheck(randomTopTwo, angleTopTwoX, angleTopTwoY, angleTopTwoZ).equals("correct"));
-            System.out.println("figure is ------------------ " + shape[randomTopTwo]);
+//            System.out.println("traverse 2 " + top_two_idn);
+//            System.out.println("randomTopTwo " + randomTopTwo);
+//            System.out.println(shape[randomTopTwo].equals(shape[top_two_idn]));
+//            System.out.println(topTwoScaleCheck(scaleTopTwo).equals("appropriate"));
+//            System.out.println(rotationCheck(randomTopTwo, angleTopTwoX, angleTopTwoY, angleTopTwoZ).equals("correct"));
+//            System.out.println("figure is ------------------ " + shape[randomTopTwo]);
             if (shape[randomTopTwo].equals(shape[top_two_idn]))
                 if (topTwoScaleCheck(scaleTopTwo).equals("appropriate")
                         && rotationCheck(randomTopTwo, angleTopTwoX, angleTopTwoY, angleTopTwoZ).equals("correct")) {
@@ -1620,11 +1626,17 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         // 19 - Azat Cube
 
         System.out.println("shape "+shape);
+        System.out.println("angleX "+angleX);
+        System.out.println("angleY "+angleY);
+        System.out.println("angleZ "+angleZ);
 
         String text;
         if (shape == 1) {
-            text = "correct";
-            System.out.println("shape 1");
+            if (angleX == 90 && angleY == 90 && angleZ == 180) {
+                text = "correct";
+            } else {
+                text = "incorrect";
+            }
         } else if (shape == 2) {
             // x and y
             if (((angleX % 90 == 0) && (angleY % 90 == 0) && (angleZ % 90 == 0))) {

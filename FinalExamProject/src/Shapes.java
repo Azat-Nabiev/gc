@@ -8,12 +8,14 @@ public class Shapes {
     }
 
     public static void cubeAzat(GL2 gl) {
-        cube(gl, 2, true);
+        cuboid(gl, 2, 1, 0.1, true);
     }
 
-
-    public static void cuboid(GL2 gl) {
-        cuboid(gl, 1, true);
+    public static void platform(GL2 gl) {
+        gl.glPushMatrix();
+        gl.glTranslated(0, 0, -0.5);
+        uvPlatform(gl, 2, 0.2, 16, 10, 5, true);
+        gl.glPopMatrix();
     }
 
     public static void tetrahedron(GL2 gl) {
@@ -46,6 +48,97 @@ public class Shapes {
         gl.glTranslated(0, 0, -0.5);
         uvCylinder(gl, 0.5, 1, 16, 10, 5, true);
         gl.glPopMatrix();
+    }
+
+    public static void uvPlatform(GL2 gl, double radius, double height,
+                                  int slices, int stacks, int rings, boolean makeTexCoords) {
+        double stackHeight = height / stacks;
+        double ringHeight = height / (rings + 1);
+        double deltaRadius = radius / rings;
+
+        for (int i = 0; i < slices; i++) {
+            double angle1 = (i * 2 * Math.PI) / slices;
+            double angle2 = ((i + 1) * 2 * Math.PI) / slices;
+
+            double x1 = radius * Math.cos(angle1);
+            double z1 = radius * Math.sin(angle1);
+            double x2 = radius * Math.cos(angle2);
+            double z2 = radius * Math.sin(angle2);
+
+            for (int j = 0; j <= stacks; j++) {
+                double y = j * stackHeight;
+
+                gl.glBegin(GL2.GL_QUADS);
+                gl.glNormal3d(x1 / radius, 0, z1 / radius);
+                if (makeTexCoords)
+                    gl.glTexCoord2d(i / (double) slices, j / (double) stacks);
+                gl.glVertex3d(x1, y, z1);
+                gl.glNormal3d(x2 / radius, 0, z2 / radius);
+                if (makeTexCoords)
+                    gl.glTexCoord2d((i + 1) / (double) slices, j / (double) stacks);
+                gl.glVertex3d(x2, y, z2);
+
+                gl.glNormal3d(x2 / radius, 0, z2 / radius);
+                if (makeTexCoords)
+                    gl.glTexCoord2d((i + 1) / (double) slices, (j + 1) / (double) stacks);
+                gl.glVertex3d(x2, y + stackHeight, z2);
+                gl.glNormal3d(x1 / radius, 0, z1 / radius);
+                if (makeTexCoords)
+                    gl.glTexCoord2d(i / (double) slices, (j + 1) / (double) stacks);
+                gl.glVertex3d(x1, y + stackHeight, z1);
+                gl.glEnd();
+            }
+
+            for (int k = 0; k < rings; k++) {
+                double y = (k + 1) * ringHeight;
+                double r1 = radius - (k + 1) * deltaRadius;
+                double r2 = radius - k * deltaRadius;
+
+                gl.glBegin(GL2.GL_QUADS);
+                for (int j = 0; j < slices; j++) {
+                    angle1 = (j * 2 * Math.PI) / slices;
+                    angle2 = ((j + 1) * 2 * Math.PI) / slices;
+
+                    x1 = r1 * Math.cos(angle1);
+                    z1 = r1 * Math.sin(angle1);
+                    x2 = r1 * Math.cos(angle2);
+                    z2 = r1 * Math.sin(angle2);
+                    double x3 = r2 * Math.cos(angle2);
+                    double z3 = r2 * Math.sin(angle2);
+                    double x4 = r2 * Math.cos(angle1);
+                    double z4 = r2 * Math.sin(angle1);
+
+                    gl.glNormal3d(0, -1, 0);
+                    if (makeTexCoords)
+                        gl.glTexCoord2d(j / (double) slices, k / (double) rings);
+                    gl.glVertex3d(x1, y - ringHeight, z1);
+                    if (makeTexCoords)
+                        gl.glTexCoord2d((j + 1) / (double) slices, k / (double) rings);
+                    gl.glVertex3d(x2, y - ringHeight, z2);
+                    if (makeTexCoords)
+                        gl.glTexCoord2d((j + 1) / (double) slices, (k + 1) / (double) rings);
+                    gl.glVertex3d(x3, y, z3);
+                    if (makeTexCoords)
+                        gl.glTexCoord2d(j / (double) slices, (k + 1) / (double) rings);
+                    gl.glVertex3d(x4, y, z4);
+
+                    gl.glNormal3d(0, 1, 0);
+                    if (makeTexCoords)
+                        gl.glTexCoord2d(j / (double) slices, k / (double) rings);
+                    gl.glVertex3d(x4, height - y, z4);
+                    if (makeTexCoords)
+                        gl.glTexCoord2d((j+ 1) / (double) slices, k / (double) rings);
+                    gl.glVertex3d(x3, height - y, z3);
+                    if (makeTexCoords)
+                        gl.glTexCoord2d((j + 1) / (double) slices, (k + 1) / (double) rings);
+                    gl.glVertex3d(x2, height - y + ringHeight, z2);
+                    if (makeTexCoords)
+                        gl.glTexCoord2d(j / (double) slices, (k + 1) / (double) rings);
+                    gl.glVertex3d(x1, height - y + ringHeight, z1);
+                }
+                gl.glEnd();
+            }
+        }
     }
 
     public static void uvCone(GL2 gl) {
@@ -252,40 +345,76 @@ public class Shapes {
     }
 
 
-    public static void cuboid(GL2 gl, double side, boolean makeTexCoords) {
+    public static void cuboid(GL2 gl, double width, double height, double depth, boolean makeTexCoords) {
         gl.glPushMatrix();
-        gl.glScalef(2, 1f, 1);
-        gl.glRotatef(-90, -1, 0, 0);  // This puts the textures in the orientation I want.
+        gl.glTranslated(-width / 2, -height / 2, -depth / 2);
+
         gl.glPushMatrix();
-        gl.glTranslated(0, 0, side / 2);
-        square(gl, side, makeTexCoords);  // Each side of the cube is a transformed square.
-        gl.glPopMatrix();
-        gl.glPushMatrix();
-        gl.glRotatef(90, 0, 1, 0);
-        gl.glTranslated(0, 0, side / 2);
-        square(gl, side, makeTexCoords);
-        gl.glPopMatrix();
-        gl.glPushMatrix();
+        gl.glTranslated(0, 0, depth / 2);
         gl.glRotatef(180, 0, 1, 0);
-        gl.glTranslated(0, 0, side / 2);
-        square(gl, side, makeTexCoords);
+        squareSide(gl, width, height, makeTexCoords);
         gl.glPopMatrix();
+
+        //odna iz vetok
         gl.glPushMatrix();
-        gl.glRotatef(270, 0, 1, 0);
-        gl.glTranslated(0, 0, side / 2);
-        square(gl, side, makeTexCoords);
+        gl.glTranslated(-width / 2, 0, 0);
+        gl.glRotatef(90, 0, 1, 0);
+        squareSide(gl, depth, height, makeTexCoords);
         gl.glPopMatrix();
+
         gl.glPushMatrix();
-        gl.glRotatef(90, -1, 0, 0);
-        gl.glTranslated(0, 0, side / 2);
-        square(gl, side, makeTexCoords);
+        gl.glTranslated(width / 2, 0, 0);
+        gl.glRotatef(-90, 0, 1, 0);
+        squareSide(gl, depth, height, makeTexCoords);
         gl.glPopMatrix();
+
         gl.glPushMatrix();
-        gl.glRotatef(-90, -1, 0, 0);
-        gl.glTranslated(0, 0, side / 2);
-        square(gl, side, makeTexCoords);
+        gl.glTranslated(0, 0, -depth / 2);
+        squareSide(gl, width, height, makeTexCoords);
         gl.glPopMatrix();
+
+        gl.glPushMatrix();
+        gl.glTranslated(0, -height / 2, 0);
+        gl.glRotatef(90, 1, 0, 0);
+        squareSide(gl, width, depth, makeTexCoords);
         gl.glPopMatrix();
+
+        gl.glPushMatrix();
+        gl.glTranslated(0, height / 2, 0);
+        gl.glRotatef(-90, 1, 0, 0);
+        squareSide(gl, width, depth, makeTexCoords);
+        gl.glPopMatrix();
+
+        gl.glPopMatrix();
+    }
+
+    public static void squareSide(GL2 gl, double width, double height, boolean makeTexCoords) {
+        double x1 = -width / 2;
+        double x2 = width / 2;
+        double y1 = -height / 2;
+        double y2 = height / 2;
+
+        if (makeTexCoords) {
+            gl.glBegin(GL2.GL_POLYGON);
+            gl.glNormal3d(0, 0, 1);
+            gl.glTexCoord2d(0, 0);
+            gl.glVertex3d(x1, y1, 0);
+            gl.glTexCoord2d(1, 0);
+            gl.glVertex3d(x2, y1, 0);
+            gl.glTexCoord2d(1, 1);
+            gl.glVertex3d(x2, y2, 0);
+            gl.glTexCoord2d(0, 1);
+            gl.glVertex3d(x1, y2, 0);
+            gl.glEnd();
+        } else {
+            gl.glBegin(GL2.GL_POLYGON);
+            gl.glNormal3d(0, 0, 1);
+            gl.glVertex3d(x1, y1, 0);
+            gl.glVertex3d(x2, y1, 0);
+            gl.glVertex3d(x2, y2, 0);
+            gl.glVertex3d(x1, y2, 0);
+            gl.glEnd();
+        }
     }
 
 
