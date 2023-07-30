@@ -886,9 +886,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         scaleTopShape = 1;
 
         // TOP TWO
-        topTwoX = 0.5;
-        topTwoY = 1.5;
-        topTwoZ = -0.5;
+        topTwoX = 0.4;
+        topTwoY = 1.3;
+        topTwoZ = -1.2;
 
         scaleTopTwoShape = 1;
 
@@ -917,14 +917,14 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         // TOP SIX
         topSixX = 0.5;
         topSixY = 0.8;
-        topSixZ = -2;
+        topSixZ = -1.6;
 
         scaleTopSixShape = 1;
 
         // TOP SEVEN
         topSevenX = 0.5;
         topSevenY = 2;
-        topSevenZ = -2;
+        topSevenZ = -1.6;
 
         scaleTopSevenShape = 1;
 
@@ -1525,6 +1525,8 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
 
         gl.glTranslated(topTwoX, topTwoY, topTwoZ);
         gl.glScalef(scaleTopTwoShape, scaleTopTwoShape, scaleTopTwoShape);
+
+        gl.glRotatef(45, 0, 1, 0);
 
         drawShape(drawable, randomTopTwo);
         gl.glPopMatrix();
@@ -2398,7 +2400,8 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             }
         } else if (shape == 2) {
             // x and y
-            if (((angleX % 90 == 0) && (angleY % 90 == 0) && (angleZ % 90 == 0))) {
+            if (((angleX % 360 == 0) && (angleY % 45 == 0) && (angleZ % 360 == 0)) ||
+                    ((angleX % 360 == 180) && (angleY % 135 == 0) && (angleZ % 180 == 0))) {
                 text = "correct";
             } else {
                 text = "incorrect";
