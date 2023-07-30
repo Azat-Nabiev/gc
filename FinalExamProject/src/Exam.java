@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class Exam extends GLCanvas implements GLEventListener, KeyListener, MouseListener {
@@ -804,11 +805,10 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             list.add(i);
         }
 
- //       Collections.shuffle(list);
+        Collections.shuffle(list);
 
 
         randomTop = list.get(0);
-    //    randomTopTwo = list.get(3);
         randomTopTwo = list.get(1);
         randomTopThree = list.get(2);
         randomTopFour = list.get(2);
