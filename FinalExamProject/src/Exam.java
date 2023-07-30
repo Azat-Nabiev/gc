@@ -49,6 +49,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
 
     private int randomTopThree;
     private int randomTopFour;
+    private int randomTopFive;
+    private int randomTopSix;
+    private int randomTopSeven;
     private int randomRight;
     private int randomLeft;
     private int randomLeftTwo;
@@ -66,6 +69,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
     private int top_two_idn = 0;
     private int top_three_idn = 0;
     private int top_four_idn = 0;
+    private int top_five_idn = 0;
+    private int top_six_idn = 0;
+    private int top_seven_idn = 0;
     private int bottom_idn = 0;
     private int bottom_two_idn = 0;
     private int front_idn = 0;
@@ -104,6 +110,18 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
     private float redTopFour = defaultRed;
     private float greenTopFour = defaultGreen;
     private float blueTopFour = defaultBlue;
+
+    private float redTopFive = defaultRed;
+    private float greenTopFive = defaultGreen;
+    private float blueTopFive = defaultBlue;
+
+    private float redTopSix = defaultRed;
+    private float greenTopSix = defaultGreen;
+    private float blueTopSix = defaultBlue;
+
+    private float redTopSeven = defaultRed;
+    private float greenTopSeven = defaultGreen;
+    private float blueTopSeven = defaultBlue;
 
     private float redB = defaultRed;
     private float greenB = defaultGreen;
@@ -162,6 +180,21 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
     private double topFourY;
     private double topFourZ;
 
+    // TOP FIVE
+    private double topFiveX;
+    private double topFiveY;
+    private double topFiveZ;
+
+    // TOP SIX
+    private double topSixX;
+    private double topSixY;
+    private double topSixZ;
+
+    // TOP SEVEN
+    private double topSevenX;
+    private double topSevenY;
+    private double topSevenZ;
+
     // BOTTOM
     private double bottomX;
     private double bottomY;
@@ -196,6 +229,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
     private float scaleTopTwo = 0.5f;
     private float scaleTopThree = 0.5f;
     private float scaleTopFour = 0.5f;
+    private float scaleTopFive = 0.5f;
+    private float scaleTopSix = 0.5f;
+    private float scaleTopSeven = 0.5f;
     private float scaleBottom = 0.5f;
     private float scaleBottomTwo = 0.5f;
     private float scaleFront = 0.5f;
@@ -230,6 +266,18 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
     private int angleTopFourY = 90;
     private int angleTopFourZ = 90;
 
+    private int angleTopFiveX = 90;
+    private int angleTopFiveY = 90;
+    private int angleTopFiveZ = 90;
+
+    private int angleTopSixX = 90;
+    private int angleTopSixY = 90;
+    private int angleTopSixZ = 90;
+
+    private int angleTopSevenX = 90;
+    private int angleTopSevenY = 90;
+    private int angleTopSevenZ = 90;
+
     private int angleBottomX = 90;
     private int angleBottomY = 90;
     private int angleBottomZ = 90;
@@ -261,6 +309,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
     private static final int TOP_TWO_ID = 2;
     private static final int TOP_THREE_ID = 3;
     private static final int TOP_FOUR_ID = 4;
+    private static final int TOP_FIVE_ID = 5;
+    private static final int TOP_SIX_ID = 6;
+    private static final int TOP_SEVEN_ID = 7;
     private static final int BOTTOM_ID = 6;
     private static final int BOTTOM_TWO_ID = 7;
     private static final int FRONT_ID = 8;
@@ -326,6 +377,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
     private float scaleTopTwoShape;
     private float scaleTopThreeShape;
     private float scaleTopFourShape;
+    private float scaleTopFiveShape;
+    private float scaleTopSixShape;
+    private float scaleTopSevenShape;
     private float scaleBottomShape;
     private float scaleBottomTwoShape;
     private float scaleFrontShape;
@@ -416,6 +470,12 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                         top_three_idn = nameID;
                     } else if (travers == 4) {
                         top_four_idn = nameID;
+                    } else if (travers == 5) {
+                        top_five_idn = nameID;
+                    } else if (travers == 6) {
+                        top_six_idn = nameID;
+                    } else if (travers == 7) {
+                        top_seven_idn = nameID;
                     }
                 }
                 addButton.setFocusable(false);
@@ -432,6 +492,12 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                         top_three_idn = 0;
                     } else if (travers == 4) {
                         top_four_idn = 0;
+                    } else if (travers == 5) {
+                        top_five_idn = 0;
+                    } else if (travers == 6) {
+                        top_six_idn = 0;
+                    } else if (travers == 7) {
+                        top_seven_idn = 0;
                     }
                 }
                 removeButton.setFocusable(false);
@@ -698,6 +764,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         randomTopTwo = list.get(1);
         randomTopThree = list.get(2);
         randomTopFour = list.get(2);
+        randomTopFive = list.get(0);
+        randomTopSix = list.get(2);
+        randomTopSeven = list.get(0);
 
 
 
@@ -721,6 +790,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         top_three_idn = 0;
         top_two_idn = 0;
         top_four_idn = 0;
+        top_five_idn = 0;
+        top_six_idn = 0;
+        top_seven_idn = 0;
         bottom_idn = 0;
         bottom_two_idn = 0;
         front_idn = 0;
@@ -752,6 +824,18 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         redTopFour = defaultRed;
         greenTopFour = defaultGreen;
         blueTopFour = defaultBlue;
+
+        redTopFive = defaultRed;
+        greenTopFive = defaultGreen;
+        blueTopFive = defaultBlue;
+
+        redTopSix = defaultRed;
+        greenTopSix = defaultGreen;
+        blueTopSix = defaultBlue;
+
+        redTopSeven = defaultRed;
+        greenTopSeven = defaultGreen;
+        blueTopSeven = defaultBlue;
 
         redB = defaultRed;
         greenB = defaultGreen;
@@ -823,6 +907,27 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
 
         scaleTopFourShape = 1;
 
+        // TOP FIVE
+        topFiveX = 0.5;
+        topFiveY = 2;
+        topFiveZ = 1;
+
+        scaleTopFiveShape = 1;
+
+        // TOP SIX
+        topSixX = 0.5;
+        topSixY = 0.8;
+        topSixZ = -2;
+
+        scaleTopSixShape = 1;
+
+        // TOP SEVEN
+        topSevenX = 0.5;
+        topSevenY = 2;
+        topSevenZ = -2;
+
+        scaleTopSevenShape = 1;
+
         // BOTTOM
         bottomX = 1;
         bottomY = -1.63;
@@ -861,6 +966,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         scaleTopTwo = 0.5f;
         scaleTopThree = 0.5f;
         scaleTopFour = 0.5f;
+        scaleTopFive = 0.5f;
+        scaleTopSix = 0.5f;
+        scaleTopSeven = 0.5f;
         scaleBottom = 0.5f;
         scaleBottomTwo = 0.5f;
         scaleFront = 0.5f;
@@ -894,6 +1002,18 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         angleTopFourX = 90;
         angleTopFourY = 90;
         angleTopFourZ = 90;
+
+        angleTopFiveX = 90;
+        angleTopFiveY = 90;
+        angleTopFiveZ = 90;
+
+        angleTopSixX = 90;
+        angleTopSixY = 90;
+        angleTopSixZ = 90;
+
+        angleTopSevenX = 90;
+        angleTopSevenY = 90;
+        angleTopSevenZ = 90;
 
         angleBottomX = 90;
         angleBottomY = 90;
@@ -1104,6 +1224,51 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         gl.glPopMatrix();
     }
 
+    private void addTopFiveShape(GLAutoDrawable drawable, int nameID) {
+
+        GL2 gl = drawable.getGL().getGL2();
+        gl.glPushMatrix();
+        gl.glColor3f(addShapeRed, addShapeGreen, addShapeBlue);
+        gl.glTranslated(topFiveX, topFiveY, topFiveZ);
+        gl.glScalef(scaleTopFive, scaleTopFive, scaleTopFive);
+        gl.glRotatef(angleTopFiveZ, 0, 0, rotate);
+        gl.glRotatef(angleTopFiveY, 0, rotate, 0);
+        gl.glRotatef(angleTopFiveX, rotate, 0, 0);
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
+        addShape(drawable, nameID);
+        gl.glPopMatrix();
+    }
+
+    private void addTopSixShape(GLAutoDrawable drawable, int nameID) {
+
+        GL2 gl = drawable.getGL().getGL2();
+        gl.glPushMatrix();
+        gl.glColor3f(addShapeRed, addShapeGreen, addShapeBlue);
+        gl.glTranslated(topSixX, topSixY, topSixZ);
+        gl.glScalef(scaleTopSix, scaleTopSix, scaleTopSix);
+        gl.glRotatef(angleTopSixZ, 0, 0, rotate);
+        gl.glRotatef(angleTopSixY, 0, rotate, 0);
+        gl.glRotatef(angleTopSixX, rotate, 0, 0);
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
+        addShape(drawable, nameID);
+        gl.glPopMatrix();
+    }
+
+    private void addTopSevenShape(GLAutoDrawable drawable, int nameID) {
+
+        GL2 gl = drawable.getGL().getGL2();
+        gl.glPushMatrix();
+        gl.glColor3f(addShapeRed, addShapeGreen, addShapeBlue);
+        gl.glTranslated(topSevenX, topSevenY, topSevenZ);
+        gl.glScalef(scaleTopSeven, scaleTopSeven, scaleTopSeven);
+        gl.glRotatef(angleTopSevenZ, 0, 0, rotate);
+        gl.glRotatef(angleTopSevenY, 0, rotate, 0);
+        gl.glRotatef(angleTopSevenX, rotate, 0, 0);
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
+        addShape(drawable, nameID);
+        gl.glPopMatrix();
+    }
+
 
     // The buffer is examined in processHits().
 
@@ -1122,6 +1287,12 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             return "top_three";
         } else if (nameID == TOP_FOUR_ID) {
             return "top_four";
+        } else if (nameID == TOP_FIVE_ID) {
+            return "top_five";
+        } else if (nameID == TOP_SIX_ID) {
+            return "top_six";
+        } else if (nameID == TOP_SEVEN_ID) {
+            return "top_seven";
         } else if (nameID == CUBE_AZAT_ID)
             return "azat_cube";
         else if (nameID == CONE_ID)
@@ -1296,12 +1467,18 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         drawTopTwo(drawable);
         drawTopThree(drawable);
         drawTopFour(drawable);
+        drawTopFive(drawable);
+        drawTopSix(drawable);
+        drawTopSeven(drawable);
         //TODO: филлер получает idn когда добавляется фигура
         addTopShape(drawable, top_idn);
         addTopTwoShape(drawable, top_two_idn);
         addTopThreeShape(drawable, top_three_idn);
         addTopFourShape(drawable, top_four_idn);
-        System.out.println("top four idn "+top_four_idn);
+        addTopFiveShape(drawable, top_five_idn);
+        addTopSixShape(drawable, top_six_idn);
+        addTopSevenShape(drawable, top_seven_idn);
+        System.out.println("top six idn "+top_six_idn);
 
         gl.glPopMatrix();
     }
@@ -1385,6 +1562,54 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         gl.glPopMatrix();
     }
 
+    private void drawTopFive(GLAutoDrawable drawable) {
+        GL2 gl = drawable.getGL().getGL2();
+        gl.glPushMatrix();
+        gl.glColor3f(redTopFive, greenTopFive, blueTopFive);
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
+        gl.glLineWidth(2);
+
+        gl.glTranslated(topFiveX, topFiveY, topFiveZ);
+        gl.glScalef(scaleTopFiveShape, scaleTopFiveShape, scaleTopFiveShape);
+
+        gl.glRotatef(-90, 1, 0, 0);
+
+        drawShape(drawable, randomTopFive);
+        gl.glPopMatrix();
+    }
+
+    private void drawTopSix(GLAutoDrawable drawable) {
+        GL2 gl = drawable.getGL().getGL2();
+        gl.glPushMatrix();
+        gl.glColor3f(redTopSix, greenTopSix, blueTopSix);
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
+        gl.glLineWidth(2);
+
+        gl.glTranslated(topSixX, topSixY, topSixZ);
+        gl.glScalef(scaleTopSixShape, scaleTopSixShape, scaleTopSixShape);
+
+        gl.glRotatef(-90, 1, 0, 0);
+
+        drawShape(drawable, randomTopSix);
+        gl.glPopMatrix();
+    }
+
+    private void drawTopSeven(GLAutoDrawable drawable) {
+        GL2 gl = drawable.getGL().getGL2();
+        gl.glPushMatrix();
+        gl.glColor3f(redTopSeven, greenTopSeven, blueTopSeven);
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
+        gl.glLineWidth(2);
+
+        gl.glTranslated(topSevenX, topSevenY, topSevenZ);
+        gl.glScalef(scaleTopSevenShape, scaleTopSevenShape, scaleTopSevenShape);
+
+        gl.glRotatef(-90, 1, 0, 0);
+
+        drawShape(drawable, randomTopSeven);
+        gl.glPopMatrix();
+    }
+
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
@@ -1404,6 +1629,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                 redTopTwo = 0;
                 redTopThree = 0;
                 redTopFour = 0;
+                redTopFive = 0;
+                redTopSix = 0;
+                redTopSeven = 0;
                 redB = 0;
                 redBottomTwo = 0;
                 redR = 0;
@@ -1416,6 +1644,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                 redTopTwo = 1;
                 redTopThree = 0;
                 redTopFour = 0;
+                redTopFive = 0;
+                redTopSix = 0;
+                redTopSeven = 0;
                 redB = 0;
                 redBottomTwo = 0;
                 redR = 0;
@@ -1427,6 +1658,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                 redTopTwo = 0;
                 redTopThree = 1;
                 redTopFour = 0;
+                redTopFive = 0;
+                redTopSix = 0;
+                redTopSeven = 0;
                 redB = 0;
                 redBottomTwo = 0;
                 redR = 0;
@@ -1438,6 +1672,51 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                 redTopTwo = 0;
                 redTopThree = 0;
                 redTopFour = 1;
+                redTopFive = 0;
+                redTopSix = 0;
+                redTopSeven = 0;
+                redB = 0;
+                redBottomTwo = 0;
+                redR = 0;
+                redF = 0;
+                redBack = 0;
+                break;
+            case TOP_FIVE_ID:
+                redT = 0;
+                redTopTwo = 0;
+                redTopThree = 0;
+                redTopFour = 0;
+                redTopFive = 1;
+                redTopSix = 0;
+                redTopSeven = 0;
+                redB = 0;
+                redBottomTwo = 0;
+                redR = 0;
+                redF = 0;
+                redBack = 0;
+                break;
+            case TOP_SIX_ID:
+                redT = 0;
+                redTopTwo = 0;
+                redTopThree = 0;
+                redTopFour = 0;
+                redTopFive = 0;
+                redTopSix = 1;
+                redTopSeven = 0;
+                redB = 0;
+                redBottomTwo = 0;
+                redR = 0;
+                redF = 0;
+                redBack = 0;
+                break;
+            case TOP_SEVEN_ID:
+                redT = 0;
+                redTopTwo = 0;
+                redTopThree = 0;
+                redTopFour = 0;
+                redTopFive = 0;
+                redTopSix = 0;
+                redTopSeven = 1;
                 redB = 0;
                 redBottomTwo = 0;
                 redR = 0;
@@ -1474,6 +1753,21 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                         angleTopFourX += angleDelta;
                         System.out.println(angleTopFourX);
                     }
+                } else if (travers == 5) {
+                    if (angleTopFiveX < 360) {
+                        angleTopFiveX += angleDelta;
+                        System.out.println(angleTopFiveX);
+                    }
+                } else if (travers == 6) {
+                    if (angleTopSixX < 360) {
+                        angleTopSixX += angleDelta;
+                        System.out.println(angleTopSixX);
+                    }
+                } else if (travers == 7) {
+                    if (angleTopSevenX < 360) {
+                        angleTopSevenX += angleDelta;
+                        System.out.println(angleTopSevenX);
+                    }
                 }
                 break;
             case KeyEvent.VK_NUMPAD3:
@@ -1497,6 +1791,21 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                     if (angleTopFourX > 0) {
                         angleTopFourX -= angleDelta;
                         System.out.println(angleTopFourX);
+                    }
+                } else if (travers == 5) {
+                    if (angleTopFiveX > 0) {
+                        angleTopFiveX -= angleDelta;
+                        System.out.println(angleTopFiveX);
+                    }
+                } else if (travers == 6) {
+                    if (angleTopSixX > 0) {
+                        angleTopSixX -= angleDelta;
+                        System.out.println(angleTopSixX);
+                    }
+                }  else if (travers == 7) {
+                    if (angleTopSevenX > 0) {
+                        angleTopSevenX -= angleDelta;
+                        System.out.println(angleTopSevenX);
                     }
                 }
                 break;
@@ -1524,6 +1833,21 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                         angleTopFourY += angleDelta;
                         System.out.println(angleTopFourY);
                     }
+                } else if (travers == 5) {
+                    if (angleTopFiveY < 360) {
+                        angleTopFiveY += angleDelta;
+                        System.out.println(angleTopFiveY);
+                    }
+                } else if (travers == 6) {
+                    if (angleTopSixY < 360) {
+                        angleTopSixY += angleDelta;
+                        System.out.println(angleTopSixY);
+                    }
+                } else if (travers == 7) {
+                    if (angleTopSevenY < 360) {
+                        angleTopSevenY += angleDelta;
+                        System.out.println(angleTopSevenY);
+                    }
                 }
                 break;
             case KeyEvent.VK_NUMPAD6:
@@ -1547,6 +1871,21 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                     if (angleTopFourY > 0) {
                         angleTopFourY -= angleDelta;
                         System.out.println(angleTopFourY);
+                    }
+                } else if (travers == 5) {
+                    if (angleTopFiveY > 0) {
+                        angleTopFiveY -= angleDelta;
+                        System.out.println(angleTopFiveY);
+                    }
+                } else if (travers == 6) {
+                    if (angleTopSixY > 0) {
+                        angleTopSixY -= angleDelta;
+                        System.out.println(angleTopSixY);
+                    }
+                } else if (travers == 7) {
+                    if (angleTopSevenY > 0) {
+                        angleTopSevenY -= angleDelta;
+                        System.out.println(angleTopSevenY);
                     }
                 }
 
@@ -1575,6 +1914,21 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                         angleTopFourZ += angleDelta;
                         System.out.println(angleTopFourZ);
                     }
+                } else if (travers == 5) {
+                    if (angleTopFiveZ < 360) {
+                        angleTopFiveZ += angleDelta;
+                        System.out.println(angleTopFiveZ);
+                    }
+                } else if (travers == 6) {
+                    if (angleTopSixZ < 360) {
+                        angleTopSixZ += angleDelta;
+                        System.out.println(angleTopSixZ);
+                    }
+                } else if (travers == 7) {
+                    if (angleTopSevenZ < 360) {
+                        angleTopSevenZ += angleDelta;
+                        System.out.println(angleTopSevenZ);
+                    }
                 }
                 break;
             case KeyEvent.VK_NUMPAD9:
@@ -1599,6 +1953,21 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                         angleTopFourZ -= angleDelta;
                         System.out.println(angleTopFourZ);
                     }
+                } else if (travers == 5) {
+                    if (angleTopFiveZ > 0) {
+                        angleTopFiveZ -= angleDelta;
+                        System.out.println(angleTopFiveZ);
+                    }
+                } else if (travers == 6) {
+                    if (angleTopSixZ > 0) {
+                        angleTopSixZ -= angleDelta;
+                        System.out.println(angleTopSixZ);
+                    }
+                } else if (travers == 7) {
+                    if (angleTopSevenZ > 0) {
+                        angleTopSevenZ -= angleDelta;
+                        System.out.println(angleTopSevenZ);
+                    }
                 }
                 break;
 
@@ -1612,6 +1981,12 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                     scaleTopThree += scaleDelta;
                 } else if (travers == 4) {
                     scaleTopFour += scaleDelta;
+                } else if (travers == 5) {
+                    scaleTopFive += scaleDelta;
+                } else if (travers == 6) {
+                    scaleTopSix += scaleDelta;
+                } else if (travers == 7) {
+                    scaleTopSeven += scaleDelta;
                 }
 
                 break;
@@ -1625,6 +2000,12 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                     scaleTopThree -= scaleDelta;
                 } else if (travers == 4) {
                     scaleTopFour -= scaleDelta;
+                } else if (travers == 5) {
+                    scaleTopFive -= scaleDelta;
+                } else if (travers == 6) {
+                    scaleTopSix -= scaleDelta;
+                } else if (travers == 7) {
+                    scaleTopSeven -= scaleDelta;
                 }
 
                 break;
@@ -1632,7 +2013,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             case KeyEvent.VK_W:
                 travers++;
                 colorShape(travers);
-                if (travers == 5) {
+                if (travers == 8) {
                     travers = 0;
                 }
                 break;
@@ -1799,6 +2180,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         // AZAT_CUB - 2
         // CYLINDER_1 - 3
         // CYLINDER_2 - 4
+        // CONUS_2 - 5
+        // CYLINDER_3 - 6
+        // CONUS_3 - 7
 
         if (travers == 1) {
             if (shape[randomTop].equals(shape[top_idn]))
@@ -1846,6 +2230,28 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                     writeMatch("Well Done! Correct shape, rotation and scaling.",
                             (int) (windowWidth / 4f), windowHeight - 40);
                 }
+        } else if (travers == 5) {
+            if (shape[randomTopFive].equals(shape[top_five_idn]))
+//           System.out.println("traverse 1 " + rotationCheck(randomTop, angleTopX, angleTopY, angleTopZ).equals("correct"));
+                if (topScaleCheck(scaleTopFive).equals("appropriate")
+                        && rotationCheck(randomTopFive, angleTopFiveX, angleTopFiveY, angleTopFiveZ).equals("correct")) {
+                    writeMatch("Well Done! Correct shape, rotation and scaling.",
+                            (int) (windowWidth / 4f), windowHeight - 40);
+                }
+        } else if (travers == 6) {
+            if (shape[randomTopSix].equals(shape[top_six_idn]))
+                if (topTwoScaleCheck(scaleTopSix).equals("appropriate")
+                        && rotationCheck(randomTopSix, angleTopSixX, angleTopSixY, angleTopSixZ).equals("correct")) {
+                    writeMatch("Well Done! Correct shape, rotation and scaling.",
+                            (int) (windowWidth / 4f), windowHeight - 40);
+                }
+        } else if (travers == 7) {
+            if (shape[randomTopSeven].equals(shape[top_seven_idn]))
+                if (topTwoScaleCheck(scaleTopSeven).equals("appropriate")
+                        && rotationCheck(randomTopSeven, angleTopSevenX, angleTopSevenY, angleTopSevenZ).equals("correct")) {
+                    writeMatch("Well Done! Correct shape, rotation and scaling.",
+                            (int) (windowWidth / 4f), windowHeight - 40);
+                }
         }
     }
 
@@ -1887,6 +2293,33 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                         " Rotation: " + rotationCheck(randomTopFour, angleTopFourX, angleTopFourY, angleTopFourZ),
                 (int) (windowWidth / 3.5f),
                 windowHeight - 140);
+
+        writeText("Top Five: blueprint shape: " +
+                        shape[randomTopFive] +
+                        " - matched shape: " +
+                        shape[top_five_idn] + " Scaling: " +
+                        topTwoScaleCheck(scaleTopFive) +
+                        " Rotation: " + rotationCheck(randomTopFive, angleTopFiveX, angleTopFiveY, angleTopFiveZ),
+                (int) (windowWidth / 3.5f),
+                windowHeight - 140);
+
+        writeText("Top Six: blueprint shape: " +
+                        shape[randomTopSix] +
+                        " - matched shape: " +
+                        shape[top_six_idn] + " Scaling: " +
+                        topTwoScaleCheck(scaleTopSix) +
+                        " Rotation: " + rotationCheck(randomTopSix, angleTopSixX, angleTopSixY, angleTopSixZ),
+                (int) (windowWidth / 3.5f),
+                windowHeight - 140);
+
+        writeText("Top Seven: blueprint shape: " +
+                        shape[randomTopSeven] +
+                        " - matched shape: " +
+                        shape[top_seven_idn] + " Scaling: " +
+                        topTwoScaleCheck(scaleTopSeven) +
+                        " Rotation: " + rotationCheck(randomTopSeven, angleTopSevenX, angleTopSevenY, angleTopSevenZ),
+                (int) (windowWidth / 3.5f),
+                windowHeight - 140);
     }
 
     private int matchedShape() {
@@ -1902,6 +2335,15 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
             match++;
         }
         if (shape[randomTopFour].equals(shape[top_four_idn])) {
+            match++;
+        }
+        if (shape[randomTopFive].equals(shape[top_five_idn])) {
+            match++;
+        }
+        if (shape[randomTopSix].equals(shape[top_six_idn])) {
+            match++;
+        }
+        if (shape[randomTopSeven].equals(shape[top_seven_idn])) {
             match++;
         }
         return match;
@@ -1938,9 +2380,9 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
     public String rotationCheck(int shape, int angleX, int angleY, int angleZ) {
 
         // shape #:
-        // 1 - Conus
+        // 1, 5, 7 - Conus
         // 2 - Azat Cube
-        // 3 - Cylinder
+        // 3, 4, 6 - Cylinder
 
         System.out.println("shape "+ shape);
         System.out.println("angleX "+angleX);
@@ -1948,7 +2390,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
         System.out.println("angleZ "+angleZ);
 
         String text;
-        if (shape == 1) {
+        if (shape == 1 || shape == 5 || shape == 7) {
             if (angleX == 90 && angleY == 90 && angleZ == 180) {
                 text = "correct";
             } else {
@@ -1962,7 +2404,7 @@ public class Exam extends GLCanvas implements GLEventListener, KeyListener, Mous
                 text = "incorrect";
             }
             System.out.println("shape 2");
-        } else if (shape == 3 || shape == 4) {
+        } else if (shape == 3 || shape == 4 || shape == 6) {
             // x and y
             if (((angleX % 90 == 0) && (angleY % 90 == 0) && (angleZ % 180 == 0))) {
                 text = "correct";
